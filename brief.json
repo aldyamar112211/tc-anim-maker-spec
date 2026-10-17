@@ -1,0 +1,52 @@
+{
+  "format": "tc-anim-maker-brief",
+  "versi": 1,
+  "spesifikasi_lengkap": "https://raw.githubusercontent.com/aldyamar112211/tc-anim-maker-spec/main/spec.md",
+  "schema": "https://raw.githubusercontent.com/aldyamar112211/tc-anim-maker-spec/main/schema.json",
+  "contoh": "https://raw.githubusercontent.com/aldyamar112211/tc-anim-maker-spec/main/contoh/angguk-r15.json",
+  "untuk_ai": {
+    "tugas": "Bantu pengguna membuat animasi Roblox untuk editor Anim Maker Terakhir Community.",
+    "langkah": [
+      "Sebelum membuat apa pun, tanyakan ke pengguna: animasi apa yang diinginkan, dipakai untuk apa (emote, efek, NPC, aksi pemain), loop atau tidak, perkiraan durasi, dan rig R15 atau R6.",
+      "Tanyakan apakah butuh marker (misalnya saat pukulan kena, untuk memicu efek atau suara).",
+      "Kalau bisa membuka link, baca spesifikasi_lengkap. Kalau tidak bisa, cukup pakai ringkasan di brief ini.",
+      "Buat animasi sesuai skema dan aturan kualitas di bawah.",
+      "Balas dengan SATU blok kode JSON proyek (versi 2) yang bisa langsung ditempel ke Anim Maker lewat tombol Tempel JSON. Penjelasan singkat boleh ditulis di luar blok kode.",
+      "Setelah pengguna melaporkan hasil pemeriksaan editor atau kesan saat preview, perbaiki JSON dan kirim ulang versi lengkapnya."
+    ],
+    "aturan_kualitas": [
+      "Ada antisipasi sebelum gerakan besar.",
+      "Ada follow-through dan overlap: kepala dan tangan sedikit telat dari badan.",
+      "Tidak ada sendi yang diam total; badan selalu sedikit bernapas atau bergoyang.",
+      "Biarkan interpolasi default (kubik halus otomatis); pakai easing hanya untuk aksen.",
+      "Untuk loop, nilai key di t=0 dan t=durasi harus sama di setiap kanal.",
+      "Badan tidak tenggelam atau melayang dari lantai kecuali sedang lompat atau terbang.",
+      "Lutut dan siku tidak menekuk terbalik; tangan tidak menembus badan atau kepala.",
+      "Animasi yang dipakai sambil berjalan hanya menggerakkan badan atas."
+    ],
+    "larangan": [
+      "Jangan meminta, menyimpan, atau memakai API key Roblox milik pengguna.",
+      "Jangan mencoba mengakali batas unggah akun free atau TC Supporter.",
+      "Jangan menaruh marker tepat di detik 0 (tidak pernah terpanggil di Roblox)."
+    ]
+  },
+  "ringkasan_format": {
+    "struktur": "{ versi: 2, nama, rig: 'R15'|'R6', durasi (detik), fps: 24|30|60|120, atur: { priority, loop, fps: 30|60 }, track: { <Sendi>: { p: [X[],Y[],Z[]], r: [X[],Y[],Z[]] } }, event: [ { t, nama, nilai, panjang } ] }",
+    "keyframe": "{ t: detik, v: nilai } ; p dalam stud, r dalam derajat ; nilai adalah offset dari pose diam ; rotasi urutan Euler XYZ",
+    "interpolasi": "i: 0 konstan, 1 linear, 2 kubik halus (default), 3 easing dengan e: 'gaya.arah' (gaya: sine quad cubic quart quint sextic expo circ back bounce elastic ; arah: in out inout outin)",
+    "priority": "0 Idle, 1 Movement, 2 Action, 3 Action2, 4 Action3, 5 Action4, 1000 Core",
+    "sendi_R15": ["LowerTorso", "UpperTorso", "Head", "LeftUpperArm", "LeftLowerArm", "LeftHand", "RightUpperArm", "RightLowerArm", "RightHand", "LeftUpperLeg", "LeftLowerLeg", "LeftFoot", "RightUpperLeg", "RightLowerLeg", "RightFoot"],
+    "sendi_R6": ["Torso", "Head", "Left Arm", "Right Arm", "Left Leg", "Right Leg"],
+    "konvensi_R15": {
+      "Head X+": "mendongak",
+      "UpperTorso X-": "condong ke depan",
+      "RightUpperArm X+": "lengan diangkat ke depan/atas",
+      "RightUpperArm Z-": "lengan menyilang ke dalam",
+      "RightUpperArm Z+": "lengan membuka ke luar",
+      "LowerArm X+": "siku menekuk normal",
+      "LowerLeg X-": "lutut menekuk normal",
+      "sisi kiri": "cerminan sisi kanan: rotasi Y dan Z dibalik tandanya, X tetap"
+    },
+    "posisi": "Posisi (p) biasanya hanya untuk sendi akar: LowerTorso (R15) atau Torso (R6)."
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/aldyamar112211/tc-anim-maker-spec/main/schema.json",
+  "title": "Proyek Anim Maker Terakhir Community (versi 2)",
+  "type": "object",
+  "required": ["versi", "rig", "durasi", "track"],
+  "properties": {
+    "versi": { "const": 2 },
+    "nama": { "type": "string", "maxLength": 50 },
+    "rig": { "enum": ["R15", "R6"] },
+    "durasi": { "type": "number", "minimum": 0.008333, "maximum": 600 },
+    "fps": { "enum": [24, 30, 60, 120] },
+    "atur": {
+      "type": "object",
+      "properties": {
+        "priority": { "enum": [0, 1, 2, 3, 4, 5, 1000] },
+        "loop": { "type": "boolean" },
+        "fps": { "enum": [30, 60] },
+        "halus": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "follow": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "napas": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "ayun": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "jenis": { "type": "string", "pattern": "^[a-z]{1,16}$" }
+      }
+    },
+    "track": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "LowerTorso", "UpperTorso", "Head",
+          "LeftUpperArm", "LeftLowerArm", "LeftHand",
+          "RightUpperArm", "RightLowerArm", "RightHand",
+          "LeftUpperLeg", "LeftLowerLeg", "LeftFoot",
+          "RightUpperLeg", "RightLowerLeg", "RightFoot",
+          "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"
+        ]
+      },
+      "additionalProperties": { "$ref": "#/$defs/sendi" }
+    },
+    "event": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "required": ["t", "nama"],
+        "properties": {
+          "t": { "type": "number", "minimum": 0, "maximum": 600 },
+          "nama": { "type": "string", "maxLength": 64 },
+          "nilai": { "type": "string", "maxLength": 64 },
+          "panjang": { "type": "number", "minimum": 0, "maximum": 600 }
+        }
+      }
+    },
+    "layer": { "type": "array", "maxItems": 500 }
+  },
+  "$defs": {
+    "kanal": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["t", "v"],
+        "properties": {
+          "t": { "type": "number", "minimum": 0, "maximum": 600 },
+          "v": { "type": "number" },
+          "i": { "enum": [0, 1, 2, 3] },
+          "e": {
+            "type": "string",
+            "pattern": "^(sine|quad|cubic|quart|quint|sextic|expo|circ|back|bounce|elastic)\\.(in|out|inout|outin)$"
+          },
+          "m": { "enum": ["a", "d", "m"] },
+          "l": { "type": "number" },
+          "r": { "type": "number" },
+          "id": { "type": "string" }
+        }
+      }
+    },
+    "sendi": {
+      "type": "object",
+      "properties": {
+        "p": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/kanal" } },
+        "r": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/kanal" } }
+      }
+    }
+  }
+}
