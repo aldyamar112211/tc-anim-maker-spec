@@ -1,8 +1,12 @@
+![TC Anim Maker Spec](gambar/banner.png)
+
 # TC Anim Maker Spec
 
 Spesifikasi terbuka format animasi **Anim Maker Terakhir Community**, editor animasi Roblox (R15 dan R6) berbasis web.
 
 Repo ini hanya berisi format data, aturan, dan contoh. Kode editor tidak termasuk.
+
+![Editor Anim Maker](gambar/editor.png)
 
 ## Isi
 
@@ -15,6 +19,8 @@ Repo ini hanya berisi format data, aturan, dan contoh. Kode editor tidak termasu
 
 ## Cara pakai dengan AI
 
+![Alur membuat animasi dengan AI](gambar/alur.png)
+
 1. Salin isi [`brief.json`](brief.json) (atau tombol **Salin brief untuk AI** di editor) lalu tempel ke chat AI.
 2. Jawab pertanyaan AI tentang animasi yang Anda inginkan.
 3. Salin blok JSON balasan AI, lalu di editor klik **Tempel JSON**.
@@ -22,6 +28,10 @@ Repo ini hanya berisi format data, aturan, dan contoh. Kode editor tidak termasu
 5. Unggah ke Roblox dari editor dengan akun dan API key Anda sendiri.
 
 AI yang punya akses ke browser Anda juga bisa langsung bekerja di halaman editor lewat `window.TCAnimMaker`.
+
+Setelah dimuat, proyek tampil di editor lengkap dengan ringkasan key, durasi, fps, dan rig:
+
+![Kartu proyek di Anim Maker](gambar/proyek.png)
 
 ## Link mentah untuk AI
 

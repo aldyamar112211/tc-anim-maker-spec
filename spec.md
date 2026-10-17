@@ -34,6 +34,8 @@ Validasi mesin ada di [`schema.json`](schema.json). Contoh lengkap ada di folder
 
 ## 2. Rig dan sendi
 
+![Sendi rig R15 dan R6](gambar/sendi.png)
+
 Nama sendi harus persis seperti di bawah. Sendi yang tidak ada di daftar rig yang dipilih diabaikan.
 
 **R15 (15 sendi)**
